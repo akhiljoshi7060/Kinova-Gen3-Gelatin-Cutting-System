@@ -1,0 +1,19 @@
+<launch>
+  <arg name="min_x" default="-0.5"/>
+  <arg name="max_x" default="0.8"/>
+  <arg name="min_y" default="-0.5"/>
+  <arg name="max_y" default="0.5"/>
+  <arg name="min_z" default="0.0"/>
+  <arg name="max_z" default="1.0"/>
+  <arg name="safety_margin" default="0.05"/>
+  
+  <node pkg="robot_safety_monitor" type="safety_monitor.py" name="safety_monitor" output="screen">
+    <param name="min_x" value="$(arg min_x)"/>
+    <param name="max_x" value="$(arg max_x)"/>
+    <param name="min_y" value="$(arg min_y)"/>
+    <param name="max_y" value="$(arg max_y)"/>
+    <param name="min_z" value="$(arg min_z)"/>
+    <param name="max_z" value="$(arg max_z)"/>
+    <param name="safety_margin" value="$(arg safety_margin)"/>
+  </node>
+</launch>
