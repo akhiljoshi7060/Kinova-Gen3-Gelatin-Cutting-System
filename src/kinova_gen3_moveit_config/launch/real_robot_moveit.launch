@@ -1,0 +1,82 @@
+<launch>
+  <arg name="ip_address" default="192.168.1.10"/>
+  <arg name="robot_name" default="my_gen3"/>
+  <arg name="arm" default="gen3"/>
+  <arg name="gripper" default="robotiq_2f_140"/>
+  <arg name="dof" default="7"/>
+  
+  <!-- Launch the Kinova driver -->
+  <include file="$(find kortex_driver)/launch/kortex_driver.launch">
+    <arg name="ip_address" value="$(arg ip_address)"/>
+    <arg name="arm" value="$(arg arm)"/>
+    <arg name="gripper" value="$(arg gripper)"/>
+    <arg name="dof" value="$(arg dof)"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="start_rviz" value="false"/>
+    <arg name="start_moveit" value="true"/>
+  </include>
+  
+  <!-- Launch the Kinova Vision driver -->
+  <include file="$(find kinova_vision)/launch/kinova_vision.launch"/>
+  
+  <!-- Camera transform from end effector to camera
+       Using the quaternion from latest_camera_pose.launch -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="end_effector_to_camera" 
+        args="-49.4305 49.587 3.95126 0.200804 0.290464 0.442318 0.824417 tool_frame camera_color_frame" />
+  
+  <!-- ArUco marker detection -->
+  <node pkg="aruco_ros" type="single" name="aruco_single">
+    <param name="image_is_rectified" value="true"/>
+    <param name="marker_size" value="0.20"/>
+    <param name="marker_id" value="0"/>
+    <param name="camera_frame" value="camera_color_frame"/>
+    <param name="marker_frame" value="aruco_marker_frame"/>
+    <param name="reference_frame" value="base_link"/>
+    <param name="corner_refinement" value="NONE"/>
+    <remap from="/camera_info" to="/camera/color/camera_info"/>
+    <remap from="/image" to="/camera/color/image_raw"/>
+  </node>
+  
+  <!-- Add a short delay to ensure all nodes are loaded properly -->
+  <node pkg="rospy" type="sleep.py" name="sleep" args="2.0" />
+  
+  <group ns="$(arg robot_name)">
+    <!-- Launch RViz with MoveIt configuration -->
+    <node name="rviz" pkg="rviz" type="rviz" 
+          args="-d $(find kortex_description)/../kortex_move_it_config/$(arg arm)_$(arg gripper)_move_it_config/launch/moveit.rviz"
+          output="screen">
+      <param name="fixed_frame" value="base_link"/>
+    </node>
+  </group>
+  
+  <!-- Hand-eye calibration node -->
+  <include file="$(find easy_handeye)/launch/calibrate.launch">
+    <!-- Basic configuration -->
+    <arg name="eye_on_hand" value="true"/>
+    <arg name="namespace_prefix" value="kinova_gen3"/>
+    
+    <!-- Reference frames -->
+    <arg name="robot_base_frame" value="base_link"/>
+    <arg name="robot_effector_frame" value="tool_frame"/>
+    <arg name="tracking_base_frame" value="camera_color_frame"/>
+    <arg name="tracking_marker_frame" value="aruco_marker_frame"/>
+    
+    <!-- Move group configuration -->
+    <arg name="freehand_robot_movement" value="true"/>
+    <arg name="move_group_namespace" value="/my_gen3"/>
+    <arg name="move_group" value="arm"/>
+    
+    <!-- Speed settings for safety -->
+    <arg name="robot_velocity_scaling" value="0.2"/>
+    <arg name="robot_acceleration_scaling" value="0.1"/>
+    
+    <!-- Visualization -->
+    <arg name="start_rviz" value="false"/> <!-- We're already starting our own RViz -->
+  </include>
+  
+  <!-- Load joint states from joint_states.yaml if needed -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <rosparam command="load" file="$(find kortex_description)/config/joint_states.yaml" />
+    <param name="use_gui" value="false" />
+  </node>
+</launch>

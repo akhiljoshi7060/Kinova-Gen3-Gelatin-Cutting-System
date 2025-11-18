@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- The rpy in the comment uses the extrinsic XYZ convention -->
+  <!-- This is based on your latest_camera_pose.launch file -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster"
+      args="-49.4305 49.587 3.95126   0.200804 0.290464 0.442318 0.824417 end_effector_link camera_color_frame" />
+</launch>

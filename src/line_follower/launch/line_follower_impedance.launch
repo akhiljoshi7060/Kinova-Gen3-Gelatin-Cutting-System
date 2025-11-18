@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch the robot -->
+  <include file="$(find gen3_robotiq_2f_140_move_it_config)/launch/real_robot_moveit.launch">
+    <arg name="ip_address" value="192.168.1.10"/>
+    <arg name="load_robot_description" value="true"/>
+  </include>
+  
+  <!-- Launch the impedance controller -->
+  <include file="$(find kinova_cartesian_impedance)/launch/kinova_cartesian_impedance.launch"/>
+  
+  <!-- Launch the impedance line follower -->
+  <node name="impedance_line_follower" pkg="line_follower" type="impedance_line_follower.py" output="screen"/>
+</launch>
