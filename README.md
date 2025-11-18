@@ -91,7 +91,6 @@ echo "source $(pwd)/devel/setup.bash" >> ~/.bashrc
 kinova-gelatin-cutting-system/
 ├── Calibration_images_and_data/               # Camera calibration datasets and parameters
 ├── depends/                                   # Project dependencies and external libraries
-├── devel/                                     # Development build files (catkin workspace)
 ├── Frames/                                    # Reference frame definitions and transformations
 ├── src/                                       # Source code (Python scripts and ROS nodes)
 └── README.md                                 # Project documentation 
