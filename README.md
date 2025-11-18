@@ -55,8 +55,8 @@ PyYAML>=5.4.0
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/akhiljoshi7060/kinova-gelatin-cutting-system.git
-cd kinova-gelatin-cutting-system
+git clone https://github.com/akhiljoshi7060/Kinova-Gen3-Gelatin-Cutting-System.git
+cd Kinova-Gen3-Gelatin-Cutting-System
 ```
 
 ### 2. Install System Dependencies
@@ -90,44 +90,14 @@ echo "source $(pwd)/devel/setup.bash" >> ~/.bashrc
 ```
 kinova-gelatin-cutting-system/
 ├── Calibration_images_and_data/               # Camera calibration datasets and parameters
-├── config/                                    # Robot and system configuration files
 ├── depends/                                   # Project dependencies and external libraries
 ├── devel/                                     # Development build files (catkin workspace)
 ├── Frames/                                    # Reference frame definitions and transformations
-├── launch/                                    # ROS launch files for system startup
-├── Line_detection_images_analysis/           # Computer vision analysis and results
-├── results/                                   # Experimental data and performance metrics
 ├── src/                                       # Source code (Python scripts and ROS nodes)
 └── README.md                                 # Project documentation 
 ```
 
 ## Core System Components
-
-### Computer Vision System (`Line_detection_images_analysis/`)
-- **Line Detection Algorithm**: Advanced OpenCV-based line detection and tracking
-- **Real-time Processing**: Processes built-in camera feed at 1280×720 @ 30 fps
-- **Image Analysis**: Comprehensive analysis tools and results
-- **Coordinate Transformation**: Converts image pixels to robot coordinate frame
-- **Path Planning**: Generates optimal cutting trajectories from detected lines
-  
-### Calibration System (`Calibration_images_and_data/`)
-- **Hand-eye Calibration**: Comprehensive calibration datasets and parameters
-- **Camera Intrinsics**: Pre-computed calibration values for built-in cameras
-- **Calibration Images**: Complete dataset for system calibration
-- **Validation Tools**: Calibration accuracy verification utilities
-
-### Configuration Management (`config/`)
-- **Robot Parameters**: Joint limits, kinematics, and workspace definitions
-- **System Settings**: Camera parameters and vision processing configurations
-- **Safety Parameters**: Force limits and emergency stop configurations
-- **Calibration Data**: Stored calibration matrices and transformations
-
-### Launch System (`launch/`)
-- **Modular Launch Files**: Organized startup scripts for different system modes
-- **System Integration**: Complete system launch configurations
-- **Component Control**: Individual launch files for subsystem testing
-- **Parameter Management**: Centralized configuration through launch parameters
-
 ### Frame Management (`Frames/`)
 - **Coordinate Systems**: Robot base, tool, and camera frame definitions
 - **Transformations**: Spatial relationships between coordinate frames
