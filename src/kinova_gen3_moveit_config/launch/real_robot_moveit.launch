@@ -1,0 +1,31 @@
+<launch>
+  <!-- Basic robot configuration -->
+  <arg name="ip_address" default="192.168.1.10"/>
+  <arg name="robot_name" default="my_gen3"/>
+  <arg name="arm" default="gen3"/>
+  <arg name="gripper" default="robotiq_2f_140"/>
+  <arg name="dof" default="7"/>
+  
+  <!-- Step 1: First run the robot driver with its own move_it and controller configuration -->
+  <!-- IMPORTANT: We're letting the driver manage its own MoveIt setup -->
+  <include file="$(find kortex_driver)/launch/kortex_driver.launch">
+    <arg name="ip_address" value="$(arg ip_address)"/>
+    <arg name="arm" value="$(arg arm)"/>
+    <arg name="gripper" value="$(arg gripper)"/>
+    <arg name="dof" value="$(arg dof)"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="start_rviz" value="false"/>
+    <arg name="start_moveit" value="true"/>
+  </include>
+  
+  <!-- Step 2: Create a namespace prefix for all our move_it nodes to match the robot namespace -->
+  <group ns="$(arg robot_name)">
+    <!-- Step 3: Launch a separate RViz for visualization -->
+    <node name="rviz" pkg="rviz" type="rviz" 
+          args="-d $(find kortex_description)/../kortex_move_it_config/$(arg arm)_$(arg gripper)_move_it_config/launch/moveit.rviz"
+          output="screen">
+      <!-- Use the correct fixed frame -->
+      <param name="fixed_frame" value="base_link"/>
+    </node>
+  </group>
+</launch>

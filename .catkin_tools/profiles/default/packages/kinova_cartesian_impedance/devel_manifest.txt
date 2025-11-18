@@ -1,0 +1,6 @@
+kinova_cartesian_impedance
+/home/akhil/catkin_workspace/devel/.private/kinova_cartesian_impedance/lib/libkinova_cartesian_impedance.so /home/akhil/catkin_workspace/devel/lib/libkinova_cartesian_impedance.so
+/home/akhil/catkin_workspace/devel/.private/kinova_cartesian_impedance/lib/kinova_cartesian_impedance/kinova_cartesian_impedance_node /home/akhil/catkin_workspace/devel/lib/kinova_cartesian_impedance/kinova_cartesian_impedance_node
+/home/akhil/catkin_workspace/devel/.private/kinova_cartesian_impedance/lib/pkgconfig/kinova_cartesian_impedance.pc /home/akhil/catkin_workspace/devel/lib/pkgconfig/kinova_cartesian_impedance.pc
+/home/akhil/catkin_workspace/devel/.private/kinova_cartesian_impedance/share/kinova_cartesian_impedance/cmake/kinova_cartesian_impedanceConfig-version.cmake /home/akhil/catkin_workspace/devel/share/kinova_cartesian_impedance/cmake/kinova_cartesian_impedanceConfig-version.cmake
+/home/akhil/catkin_workspace/devel/.private/kinova_cartesian_impedance/share/kinova_cartesian_impedance/cmake/kinova_cartesian_impedanceConfig.cmake /home/akhil/catkin_workspace/devel/share/kinova_cartesian_impedance/cmake/kinova_cartesian_impedanceConfig.cmake

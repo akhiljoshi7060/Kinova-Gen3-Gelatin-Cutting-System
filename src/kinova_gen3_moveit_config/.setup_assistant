@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: kortex_description
+    relative_path: robots/gen3_robotiq_2f_140.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/gen3_robotiq_2f_140.srdf
+  CONFIG:
+    author_name: Akhil Joshi
+    author_email: akhiljoshi436@gmail.com
+    generated_timestamp: 1740608355
